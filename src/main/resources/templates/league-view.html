@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>League </title>
+</head>
+<body>
+    <button onclick="window.location.href='/sport/leagues'">
+        <h1>Sport table app</h1>
+    </button>
+
+    <h3>Detail of league</h3>
+    <h3>
+        <tr>
+            <td th:text="${leagueById.getName()}+' '"/>
+            <td th:text="${leagueById.getCountry()}+' '"/>
+        </tr>
+    </h3>
+    <table>
+        <td th:text="'Team '"/>
+        <td th:text="'P  '"/>
+        <td th:text="'GS  '"/>
+        <td th:text="'GC  '"/>
+        <td th:text="'M  '"/>
+        <td th:text="'W/D/L'"/>
+        <tr th:each="team : ${teams}" >
+            <td th:text="${team.getName()}+' '"/>
+            <td th:text="${team.getPoints()}+' '"/>
+            <td th:text="${team.getGoalsScored()}+' '"/>
+            <td th:text="${team.getGoalsConcede()}+' '"/>
+            <td th:text="${team.getMatches()}+' '"/>
+            <td th:text="${team.getWinDrawLost()}+' '"/>
+            <td>
+                <a th:href="@{/team/get/{idTeam}(idTeam=${team.id})}" class="btn btn-danger">Show</a>
+            </td>
+        </tr>
+    </table>
+
+    <td>
+        <form th:action="@{/leagues/{id}(id=${leagueById.id })}" th:object="${leagueById.id}" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
+
+</body>
+</html>

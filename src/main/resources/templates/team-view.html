@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title><td th:text="${team.name}"/></title>
+</head>
+<body>
+    <button onclick="window.location.href='/sport'">
+        <h1>Sport table app</h1>
+    </button>
+
+    <h3>
+        <tr>
+            <td th:text="${team.getName()}+' '"/>
+            <td th:text="${team.getCountry()}+' '"/>
+        </tr>
+    </h3>
+
+    <h3>Detail of team</h3>
+    <table>
+        <td th:text="'Team '"/>
+        <td th:text="'P  '"/>
+        <td th:text="'GS  '"/>
+        <td th:text="'GC  '"/>
+        <td th:text="'M  '"/>
+        <td th:text="'W/D/L'"/>
+    </table>
+    <table>
+        <td th:text="${team.getShortName()}+' '"/>
+        <td th:text="${team.getPoints()}+' '"/>
+        <td th:text="${team.getGoalsScored()}+' '"/>
+        <td th:text="${team.getGoalsConcede()}+' '"/>
+        <td th:text="${team.getMatches()}+' '"/>
+        <td th:text="${team.getWinDrawLost()}+' '"/>
+        <td>
+            <a th:href="@{/leagues/{id}(id=${leagueTeamBelongs})}" class="btn btn-danger">Show</a>
+        </td>
+    </table>
+
+    <h3>Last 5 matches</h3>
+    <table>
+        <tr>
+            <td>Home GH GA Away Date</td>
+        </tr>
+        <tr th:each="match : ${ma   tches}" >
+            <td th:text="${match.getTeamHome()}+' '"/>
+            <td th:text="${match.getGoalsHome()}+' '"/>
+            <td th:text="${match.getGoalsAway()}+' '"/>
+            <td th:text="${match.getTeamAway()}+' '"/>
+            <td th:text="${match.getDate()}+' '"/>
+            <td>
+                <a th:href="@{/match/{id}(id=${match.idMatch})}" class="btn btn-danger">Details</a>
+            </td>
+
+        </tr>
+    </table>
+
+</body>
+</html>
